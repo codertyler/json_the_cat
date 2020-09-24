@@ -1,10 +1,10 @@
-let catName = process.argv[2];
+const breedName = require('./index');
 
 const request = require('request');
 
-request(`https://api.thecatapi.com/v1/breeds/search?q=${catName}`, (error, response, body) => {
-  
-
+const fetchBreedDescription = function(breedName, callback) {
+ 
+  request(`https://api.thecatapi.com/v1/breeds/search?q=${breedName}`, (error, response, body) => {
   if (error) { 
   return console.log("Your request is failed", error); };
   
@@ -18,5 +18,9 @@ request(`https://api.thecatapi.com/v1/breeds/search?q=${catName}`, (error, respo
   console.log(data[0].description);
 
   
-}) 
+})
+};
 
+ 
+
+module.exports = { fetchBreedDescription };
